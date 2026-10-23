@@ -26,7 +26,6 @@ export default function Home() {
     return (
         <section className="home" id="home">
 
-            {/* Background Video */}
             {/* Hapus atribut poster={posterVideo} jika kamu menghapus import di atas */}
             <video
                 className="bg-video"

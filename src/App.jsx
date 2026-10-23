@@ -1,9 +1,8 @@
+
 import { useEffect } from 'react';
 import runVanillaJS from './mainLogic';
 
-// Import efek Jaring-Jaring Partikel
 import ParticleNetwork from './components/ParticleNetwork';
-
 import Header from './components/Header';
 import Home from './components/Home';
 import About from './components/About';
@@ -16,19 +15,14 @@ import Footer from './components/Footer';
 
 function App() {
   useEffect(() => {
-    const timer = setTimeout(() => {
-      runVanillaJS();
-    }, 150); 
-    return () => clearTimeout(timer);
+    runVanillaJS();
   }, []);
 
   return (
     <>
-      {/* Header dan Home dibiarkan di luar agar 100% bebas dari efek partikel */}
       <Header />
       <Home />
-      
-      {/* Hanya komponen dari About sampai Footer yang dibungkus efek partikel */}
+
       <ParticleNetwork>
         <About />
         <Skills />
@@ -36,8 +30,8 @@ function App() {
         <Certificates />
         <Portfolio />
         <Contact />
-        <Footer />
       </ParticleNetwork>
+      <Footer />
     </>
   );
 }

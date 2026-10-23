@@ -65,69 +65,108 @@ export default function runVanillaJS() {
     }
 
     // ==========================================
-    // 2. MESIN 3D CAROUSEL, FILTER, NAVIGASI DOTS & INTERAKSI
-    // (VERSI PRO - 100% SMOOTH, NATIVE FEEL, ANTI-LAG)
+// 2. MESIN 3D CAROUSEL, FILTER, NAVIGASI DOTS & INTERAKSI
+// ==========================================
+const filterButtons = document.querySelectorAll(".filter-btn");
+const portfolioItems = Array.from(
+    document.querySelectorAll(".portfolio-item")
+);
+const portfolioWrapper = document.querySelector(".portfolio-3d-wrapper");
+
+// Cache elemen yang sering digunakan
+const emptyState = document.querySelector(".portfolio-empty-state");
+const currentCounter = document.querySelector(".carousel-counter .current");
+const totalCounter = document.querySelector(".carousel-counter .total");
+const carouselDots = Array.from(
+    document.querySelectorAll(".carousel-dots .dot")
+);
+
+let activeIndex = 0;
+let filteredItems = portfolioItems;
+
+function update3DCarousel() {
+    const itemCount = filteredItems.length;
+
+    // Reset state semua project
+    portfolioItems.forEach(item => {
+        item.classList.remove("active", "prev", "next");
+    });
+
     // ==========================================
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const portfolioItems = Array.from(document.querySelectorAll(".portfolio-item"));
-    const portfolioWrapper = document.querySelector(".portfolio-3d-wrapper");
-    
-    let activeIndex = 0;
-    let filteredItems = portfolioItems;
-
-    // --- 1. FUNGSI UTAMA UPDATE 3D (TANPA DISPLAY: NONE) ---
-    function update3DCarousel() {
-        if (!filteredItems || filteredItems.length === 0) return;
-
-        // Reset semua class state, biarkan CSS base (.portfolio-item) yang menyembunyikan
-        portfolioItems.forEach(item => {
-            item.classList.remove("active", "prev", "next");
-        });
-
-        // Set state hanya untuk item yang masuk dalam filter saat ini
-        filteredItems.forEach((item, index) => {
-            const len = filteredItems.length;
-
-            if (index === activeIndex) {
-                item.classList.add("active");
-            } 
-            // Modulo math untuk looping tanpa batas
-            else if (index === (activeIndex - 1 + len) % len) {
-                item.classList.add("prev");
-            } 
-            // Jika item hanya 2, pastikan tidak tertimpa class next
-            else if (index === (activeIndex + 1) % len && len > 2) {
-                item.classList.add("next");
-            } 
-            else if (len === 2 && index === (activeIndex + 1) % len) {
-                item.classList.add("next"); // Fallback jika item cuma 2
-            }
-        });
-
-        // Update Counter Angka
-        const currentCounter = document.querySelector('.carousel-counter .current');
-        const totalCounter = document.querySelector('.carousel-counter .total');
-        
-        if (currentCounter && totalCounter) {
-            currentCounter.innerText = (activeIndex + 1).toString().padStart(2, '0');
-            totalCounter.innerText = filteredItems.length.toString().padStart(2, '0');
+    // EMPTY STATE
+    // ==========================================
+    if (itemCount === 0) {
+        if (emptyState) {
+            emptyState.style.display = "flex";
+            emptyState.setAttribute("aria-hidden", "false");
         }
 
-        // Update Dots
-        const dots = document.querySelectorAll('.carousel-dots .dot');
-        dots.forEach((dot, index) => {
-            if (index >= filteredItems.length) {
-                dot.style.display = "none";
-            } else {
-                dot.style.display = "block";
-                if (index === activeIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            }
+        if (currentCounter) {
+            currentCounter.textContent = "00";
+        }
+
+        if (totalCounter) {
+            totalCounter.textContent = "00";
+        }
+
+        carouselDots.forEach(dot => {
+            dot.style.display = "none";
+            dot.classList.remove("active");
         });
+
+        return;
     }
+
+    // ==========================================
+    // PROJECT TERSEDIA
+    // ==========================================
+    if (emptyState) {
+        emptyState.style.display = "none";
+        emptyState.setAttribute("aria-hidden", "true");
+    }
+
+    // Pastikan index selalu valid
+    if (activeIndex >= itemCount) {
+        activeIndex = 0;
+    }
+
+    const previousIndex = (activeIndex - 1 + itemCount) % itemCount;
+    const nextIndex = (activeIndex + 1) % itemCount;
+
+    filteredItems.forEach((item, index) => {
+        if (index === activeIndex) {
+            item.classList.add("active");
+        } else if (index === previousIndex) {
+            item.classList.add("prev");
+        } else if (index === nextIndex) {
+            item.classList.add("next");
+        }
+    });
+
+    // ==========================================
+    // COUNTER
+    // ==========================================
+    if (currentCounter) {
+        currentCounter.textContent = String(activeIndex + 1).padStart(2, "0");
+    }
+
+    if (totalCounter) {
+        totalCounter.textContent = String(itemCount).padStart(2, "0");
+    }
+
+    // ==========================================
+    // DOTS
+    // ==========================================
+    carouselDots.forEach((dot, index) => {
+        const visible = index < itemCount;
+
+        dot.style.display = visible ? "block" : "none";
+        dot.classList.toggle(
+            "active",
+            visible && index === activeIndex
+        );
+    });
+}
 
     // --- 2. FUNGSI NAVIGASI GLOBAL ---
     window.nextProject = function() {
@@ -152,22 +191,38 @@ export default function runVanillaJS() {
 
     // --- 3. LOGIKA FILTER BUTTONS ---
     if (filterButtons.length && portfolioItems.length) {
+
         filterButtons.forEach(btn => {
             if (!btn.dataset.listenerAttached) {
+
                 btn.addEventListener("click", () => {
+
+                    // Abaikan jika tombol yang sama diklik lagi
+                    if (btn.classList.contains("active")) return;
+
+                    // Tombol aktif
                     filterButtons.forEach(b => b.classList.remove("active"));
                     btn.classList.add("active");
-                    
+
                     const filter = btn.dataset.filter;
-                    if (filter === "all") {
-                        filteredItems = portfolioItems;
-                    } else {
-                        filteredItems = portfolioItems.filter(item => item.dataset.category === filter);
-                    }
-                    
-                    activeIndex = 0; // Reset ke kartu pertama setiap ganti filter
-                    requestAnimationFrame(() => update3DCarousel());
+
+                    // Tentukan project berdasarkan kategori
+                    filteredItems = filter === "all"
+                        ? portfolioItems
+                        : portfolioItems.filter(
+                            item => item.dataset.category === filter
+                        );
+
+                    // Selalu mulai dari project pertama
+                    activeIndex = 0;
+
+                    // Beri kesempatan browser menyelesaikan
+                    // perubahan visual sebelum carousel diperbarui
+                    requestAnimationFrame(() => {
+                        update3DCarousel();
+                    });
                 });
+
                 btn.dataset.listenerAttached = "true";
             }
         });
@@ -191,15 +246,18 @@ export default function runVanillaJS() {
         }
     });
 
-    // --- 5. DRAG MOUSE & SWIPE TOUCH (REAL-TIME NATIVE FEEL) ---
+    // --- 5. DRAG MOUSE & SWIPE TOUCH (REAL-TIME NATIVE FEEL - OPTIMIZED) ---
     if (portfolioWrapper && !portfolioWrapper.dataset.swipeAttached) {
         let isDragging = false;
         let startPos = 0;
         const dragThreshold = 50; 
+        
+        // VARIABEL CACHE BARU: Untuk menyimpan memori agar HP tidak bekerja keras
+        let activeCardCache = null; 
+        let animationFrameId = null;
 
         portfolioWrapper.addEventListener("pointerdown", (e) => {
-            // [FIX PENTING] Abaikan drag jika user menekan tombol slider dalam gambar atau link!
-            // Ini mencegah kartu luar ikut terseret saat tombol dalam diklik.
+            // Abaikan drag jika user menekan tombol slider dalam gambar atau link!
             if (e.target.closest("button") || e.target.closest(".slider-btn") || e.target.closest("a")) {
                 return; 
             }
@@ -207,10 +265,18 @@ export default function runVanillaJS() {
             isDragging = true;
             startPos = e.clientX;
             portfolioWrapper.style.cursor = "grabbing";
+
+            // CACHE DOM: Cari kartu aktif SEKALi saja saat layar disentuh, bukan pas digeser
+            activeCardCache = document.querySelector(".portfolio-item.active");
+            
+            if (activeCardCache) {
+                // Matikan transisi cukup SEKALI di awal drag
+                activeCardCache.style.transition = "none"; 
+            }
         });
 
         portfolioWrapper.addEventListener("pointermove", (e) => {
-            if (!isDragging) return;
+            if (!isDragging || !activeCardCache) return;
 
             const currentPosition = e.clientX;
             const diff = currentPosition - startPos;
@@ -220,13 +286,17 @@ export default function runVanillaJS() {
                 e.preventDefault();
             }
 
-            const activeCard = document.querySelector(".portfolio-item.active");
-            if (activeCard) {
-                activeCard.style.transition = "none"; 
+            // OPTIMASI UTAMA: Bersihkan antrean animasi sebelumnya
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+
+            // Gunakan requestAnimationFrame agar animasi berjalan mulus di 60FPS
+            animationFrameId = requestAnimationFrame(() => {
                 const moveX = Math.max(-150, Math.min(150, diff));
                 const rotateY = moveX * 0.1; 
-                activeCard.style.transform = `scale(1) translateX(${moveX}px) translateZ(0) rotateY(${rotateY}deg)`;
-            }
+                
+                // Gunakan translate3d untuk memaksa GPU (Hardware Acceleration) bekerja
+                activeCardCache.style.transform = `scale(1) translate3d(${moveX}px, 0, 0) rotateY(${rotateY}deg)`;
+            });
         });
 
         const stopDrag = (e) => {
@@ -234,17 +304,26 @@ export default function runVanillaJS() {
             isDragging = false;
             portfolioWrapper.style.cursor = "default";
             
+            // Bersihkan sisa animasi yang mungkin tertinggal
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            
             const currentPosition = e.clientX;
             const diff = currentPosition - startPos;
-            const activeCard = document.querySelector(".portfolio-item.active");
 
-            if (activeCard) {
-                activeCard.style.transition = "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)"; 
-                activeCard.style.transform = "";  
+            if (activeCardCache) {
+                // Kembalikan transisi animasi saat dilepas
+                activeCardCache.style.transition = "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)"; 
+                activeCardCache.style.transform = "";  
+                
+                // Buat variabel sementara karena setTimeout akan berjalan nanti
+                const cardToClean = activeCardCache;
                 
                 setTimeout(() => {
-                    if (activeCard) activeCard.style.transition = "";
+                    if (cardToClean) cardToClean.style.transition = "";
                 }, 500); 
+                
+                // Kosongkan cache untuk geseran berikutnya
+                activeCardCache = null;
             }
 
             // Eksekusi Pindah Kartu
@@ -297,50 +376,99 @@ export default function runVanillaJS() {
     // 3. SLIDER GAMBAR DALAM & LIGHTBOX
     // ==========================================
     window.slidePortfolio = function (id, direction) {
-        // [FIX ANTI-LONCAT & ANTI-BOCOR]
-        // Mengambil event klik yang sedang terjadi otomatis (tanpa perlu ubah JSX)
-        if (window.event) {
-            window.event.preventDefault(); // Mencegah layar loncat naik/turun
-            window.event.stopPropagation(); // Mencegah kartu 3D ikut bergeser
-        }
+    const slider = document.getElementById(`portfolio-slider-${id}`);
+    if (!slider) return;
 
-        const slider = document.getElementById(`portfolio-slider-${id}`);
-        if (!slider) return;
-        const images = slider.querySelectorAll(".slider-img");
-        if (!images.length) return;
-        let current = [...images].findIndex(img => img.classList.contains("active"));
-        if (current < 0) current = 0;
-        images[current].classList.remove("active");
-        const next = (current + direction + images.length) % images.length;
-        images[next].classList.add("active");
-    };
+    const images = [...slider.querySelectorAll(".slider-img")];
+    if (images.length < 2) return;
 
-    // (Lakukan hal yang sama untuk slider certificate)
-    window.slideCertificate = function (id, dir) {
-        if (window.event) {
-            window.event.preventDefault();
-            window.event.stopPropagation();
-        }
+    // Cegah klik berulang saat animasi masih berlangsung
+    if (slider.dataset.sliding === "true") return;
 
-        const slider = document.getElementById(`certificate-slider-${id}`);
-        if (!slider) return;
-        const imgs = slider.querySelectorAll(".slider-img");
-        if (!imgs.length) return;
-        let current = [...imgs].findIndex(img => img.classList.contains("active"));
-        if (current < 0) current = 0;
-        imgs[current].classList.remove("active");
-        const next = (current + dir + imgs.length) % imgs.length;
-        imgs[next].classList.add("active");
-    };
+    const currentIndex = images.findIndex(
+        img => img.classList.contains("active")
+    );
 
-    function initPortfolioSliderImages() {
-        document.querySelectorAll(".portfolio-slider, .certificate-slider").forEach(slider => {
-            const imgs = slider.querySelectorAll(".slider-img");
-            if (!imgs.length) return;
-            imgs.forEach((img, i) => img.classList.toggle("active", i === 0));
+    if (currentIndex < 0) return;
+
+    const nextIndex =
+        (currentIndex + direction + images.length) % images.length;
+
+    const currentImage = images[currentIndex];
+    const nextImage = images[nextIndex];
+
+    const duration = 500;
+
+    // Klik kanan:
+    // gambar lama keluar kiri, gambar baru masuk dari kanan
+    //
+    // Klik kiri:
+    // gambar lama keluar kanan, gambar baru masuk dari kiri
+    const currentOut =
+        direction > 0
+            ? "-100%"
+            : "100%";
+
+    const nextStart =
+        direction > 0
+            ? "100%"
+            : "-100%";
+
+    slider.dataset.sliding = "true";
+
+    // Siapkan gambar lama
+    currentImage.style.transition =
+        `transform ${duration}ms cubic-bezier(0.25, 1, 0.5, 1)`;
+    currentImage.style.transform =
+        "translate3d(0, 0, 0)";
+    currentImage.style.opacity = "1";
+    currentImage.style.zIndex = "2";
+
+    // Siapkan gambar baru di luar layar
+    nextImage.style.transition = "none";
+    nextImage.style.transform =
+        `translate3d(${nextStart}, 0, 0)`;
+    nextImage.style.opacity = "1";
+    nextImage.style.zIndex = "3";
+
+    nextImage.classList.add("active");
+
+    // Beri browser kesempatan menerapkan posisi awal
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+
+            // Gambar lama keluar
+            currentImage.style.transform =
+                `translate3d(${currentOut}, 0, 0)`;
+
+            // Gambar baru masuk
+            nextImage.style.transition =
+                `transform ${duration}ms cubic-bezier(0.25, 1, 0.5, 1)`;
+
+            nextImage.style.transform =
+                "translate3d(0, 0, 0)";
         });
-    }
-    initPortfolioSliderImages();
+    });
+
+    // Bersihkan setelah animasi selesai
+    setTimeout(() => {
+        currentImage.classList.remove("active");
+
+        currentImage.style.transition = "";
+        currentImage.style.transform = "";
+        currentImage.style.opacity = "";
+        currentImage.style.zIndex = "";
+
+        nextImage.classList.add("active");
+
+        nextImage.style.transition = "";
+        nextImage.style.transform = "";
+        nextImage.style.opacity = "";
+        nextImage.style.zIndex = "";
+
+        slider.dataset.sliding = "false";
+    }, duration + 30);
+};
 
     // ==========================================
     // 4. LIGHTBOX & MODAL
@@ -478,68 +606,269 @@ export default function runVanillaJS() {
     // 5. ZOOM IMAGE
     // ==========================================
     function enableSimpleZoom(modalId, imgId) {
-        const modal = document.getElementById(modalId);
-        const img = modal?.querySelector(`#${imgId}`);
-        if (!modal || !img) return;
+    const modal = document.getElementById(modalId);
+    const img = modal?.querySelector(`#${imgId}`);
 
-        let scale = 1, lastScale = 1, startDistance = null;
-        let translateX = 0, translateY = 0, lastTranslateX = 0, lastTranslateY = 0;
-        let isDragging = false, startX = 0, startY = 0, lastTap = 0, originX = 0, originY = 0;
+    if (!modal || !img) return;
+    if (modal.dataset.zoomAttached === "true") return;
 
-        img.style.transformOrigin = "center center";
-        img.style.transition = "transform 0.2s ease-out";
-        img.style.touchAction = "none";
+    let scale = 1;
+    let lastScale = 1;
 
-        const getDistance = touches => Math.hypot(touches[0].clientX - touches[1].clientX, touches[0].clientY - touches[1].clientY);
-        const getMidpoint = touches => ({ x: (touches[0].clientX + touches[1].clientX) / 2, y: (touches[0].clientY + touches[1].clientY) / 2 });
-        const applyTransform = () => { img.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`; };
+    let translateX = 0;
+    let translateY = 0;
+    let lastTranslateX = 0;
+    let lastTranslateY = 0;
 
-        if (!modal.dataset.zoomAttached) {
-            modal.addEventListener("touchstart", e => {
-                if (e.touches.length > 2) return;
-                const now = Date.now();
-                if (now - lastTap < 400) {
-                    scale = 1; lastScale = 1; translateX = translateY = lastTranslateX = lastTranslateY = 0;
-                    img.style.transformOrigin = "center center"; applyTransform();
-                }
-                lastTap = now;
-                if (e.touches.length === 2) {
-                    startDistance = getDistance(e.touches);
-                    const mid = getMidpoint(e.touches);
-                    const rect = img.getBoundingClientRect();
-                    originX = mid.x - rect.left; originY = mid.y - rect.top;
-                    img.style.transformOrigin = `${originX}px ${originY}px`;
-                } else if (e.touches.length === 1 && scale > 1) {
-                    isDragging = true; startX = e.touches[0].clientX - lastTranslateX; startY = e.touches[0].clientY - lastTranslateY;
-                }
-            }, { passive: false });
+    let startDistance = null;
+    let isDragging = false;
 
-            modal.addEventListener("touchmove", e => {
-                if (e.touches.length > 2) return;
-                if (e.touches.length === 2 && startDistance) {
-                    const currentDistance = getDistance(e.touches);
-                    scale = lastScale * (currentDistance / startDistance);
-                    scale = Math.max(1, Math.min(3, scale));
-                    applyTransform(); e.preventDefault();
-                } else if (e.touches.length === 1 && isDragging) {
-                    translateX = e.touches[0].clientX - startX; translateY = e.touches[0].clientY - startY;
-                    const maxX = (img.offsetWidth * (scale - 1)) / 2; const maxY = (img.offsetHeight * (scale - 1)) / 2;
-                    translateX = Math.max(-maxX, Math.min(maxX, translateX)); translateY = Math.max(-maxY, Math.min(maxY, translateY));
-                    applyTransform(); e.preventDefault();
-                }
-            }, { passive: false });
+    let startX = 0;
+    let startY = 0;
 
-            modal.addEventListener("touchend", e => {
-                lastScale = scale; lastTranslateX = translateX; lastTranslateY = translateY;
-                if (e.touches.length < 2) startDistance = null;
-                if (e.touches.length === 0) isDragging = false;
-            });
-            modal.dataset.zoomAttached = "true";
+    let lastTap = 0;
+
+    let originX = 0;
+    let originY = 0;
+
+    let frameId = null;
+
+    // Cache ukuran gambar agar tidak dihitung berulang saat drag
+    let imageWidth = 0;
+    let imageHeight = 0;
+
+    // Respect user accessibility preference
+    const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    // Dasar transform
+    img.style.transformOrigin = "center center";
+    img.style.touchAction = "none";
+    img.style.userSelect = "none";
+    img.style.webkitUserSelect = "none";
+    img.style.webkitUserDrag = "none";
+
+    // Transition hanya dipakai saat reset / double tap,
+    // BUKAN saat jari sedang bergerak.
+    const resetTransition = reduceMotion
+        ? "none"
+        : "transform 0.2s cubic-bezier(0.25, 1, 0.5, 1)";
+
+    const applyTransform = () => {
+        if (frameId) {
+            cancelAnimationFrame(frameId);
         }
-    }
 
-    enableSimpleZoom("imageModal", "lightboxImg");
-    enableSimpleZoom("certificateModal", "certificateImg");
+        frameId = requestAnimationFrame(() => {
+            img.style.transform =
+                `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
+
+            frameId = null;
+        });
+    };
+
+    const setInteractionMode = (active) => {
+        img.style.willChange = active ? "transform" : "auto";
+
+        // Saat gesture berlangsung, jangan gunakan transition
+        img.style.transition = active ? "none" : resetTransition;
+    };
+
+    const resetZoom = (animated = true) => {
+        scale = 1;
+        lastScale = 1;
+
+        translateX = 0;
+        translateY = 0;
+
+        lastTranslateX = 0;
+        lastTranslateY = 0;
+
+        startDistance = null;
+        isDragging = false;
+
+        img.style.transition =
+            animated && !reduceMotion
+                ? resetTransition
+                : "none";
+
+        applyTransform();
+
+        // will-change hanya selama interaksi
+        requestAnimationFrame(() => {
+            img.style.willChange = "auto";
+        });
+    };
+
+    const getDistance = (touches) => {
+        const dx = touches[0].clientX - touches[1].clientX;
+        const dy = touches[0].clientY - touches[1].clientY;
+
+        return Math.hypot(dx, dy);
+    };
+
+    const getMidpoint = (touches) => ({
+        x: (touches[0].clientX + touches[1].clientX) / 2,
+        y: (touches[0].clientY + touches[1].clientY) / 2
+    });
+
+    modal.addEventListener(
+        "touchstart",
+        (e) => {
+            if (e.touches.length > 2) return;
+
+            const now = performance.now();
+
+            // Double tap = reset zoom
+            if (e.touches.length === 1 && now - lastTap < 350) {
+                resetZoom(true);
+                lastTap = 0;
+                e.preventDefault();
+                return;
+            }
+
+            lastTap = now;
+
+            setInteractionMode(true);
+
+            // PINCH ZOOM
+            if (e.touches.length === 2) {
+                startDistance = getDistance(e.touches);
+
+                const midpoint = getMidpoint(e.touches);
+                const rect = img.getBoundingClientRect();
+
+                originX = midpoint.x - rect.left;
+                originY = midpoint.y - rect.top;
+
+                img.style.transformOrigin =
+                    `${originX}px ${originY}px`;
+
+                imageWidth = img.offsetWidth;
+                imageHeight = img.offsetHeight;
+
+                e.preventDefault();
+                return;
+            }
+
+            // PAN GAMBAR SAAT ZOOM
+            if (e.touches.length === 1 && scale > 1) {
+                const touch = e.touches[0];
+
+                isDragging = true;
+
+                startX = touch.clientX - lastTranslateX;
+                startY = touch.clientY - lastTranslateY;
+
+                imageWidth = img.offsetWidth;
+                imageHeight = img.offsetHeight;
+
+                e.preventDefault();
+            }
+        },
+        { passive: false }
+    );
+
+    modal.addEventListener(
+        "touchmove",
+        (e) => {
+            if (e.touches.length > 2) return;
+
+            // PINCH
+            if (e.touches.length === 2 && startDistance) {
+                const currentDistance = getDistance(e);
+
+                const ratio =
+                    currentDistance / startDistance;
+
+                scale = Math.max(
+                    1,
+                    Math.min(3, lastScale * ratio)
+                );
+
+                applyTransform();
+
+                e.preventDefault();
+                return;
+            }
+
+            // PAN
+            if (e.touches.length === 1 && isDragging && scale > 1) {
+                const touch = e.touches[0];
+
+                translateX =
+                    touch.clientX - startX;
+
+                translateY =
+                    touch.clientY - startY;
+
+                // Batas pergerakan gambar
+                const maxX =
+                    (imageWidth * (scale - 1)) / 2;
+
+                const maxY =
+                    (imageHeight * (scale - 1)) / 2;
+
+                translateX = Math.max(
+                    -maxX,
+                    Math.min(maxX, translateX)
+                );
+
+                translateY = Math.max(
+                    -maxY,
+                    Math.min(maxY, translateY)
+                );
+
+                applyTransform();
+
+                e.preventDefault();
+            }
+        },
+        { passive: false }
+    );
+
+    modal.addEventListener(
+        "touchend",
+        (e) => {
+            lastScale = scale;
+
+            lastTranslateX = translateX;
+            lastTranslateY = translateY;
+
+            if (e.touches.length < 2) {
+                startDistance = null;
+            }
+
+            if (e.touches.length === 0) {
+                isDragging = false;
+
+                // Gesture selesai → transition boleh dikembalikan
+                img.style.transition = resetTransition;
+
+                // Jangan pertahankan will-change terus-menerus
+                requestAnimationFrame(() => {
+                    img.style.willChange = "auto";
+                });
+            }
+        },
+        { passive: true }
+    );
+
+    // Reset ketika modal ditutup / dibuka kembali
+    const observer = new MutationObserver(() => {
+        if (!modal.classList.contains("show")) {
+            resetZoom(false);
+        }
+    });
+
+    observer.observe(modal, {
+        attributes: true,
+        attributeFilter: ["class"]
+    });
+
+    modal.dataset.zoomAttached = "true";
+}
 
     // ==========================================
     // 6. SKILLS SLIDER & SWIPE
@@ -774,10 +1103,8 @@ export default function runVanillaJS() {
         card.dataset.spotlightAttached = "true";
     });
 
-    // ==========================================
-    // 10. FITUR ON/OFF MODE (CYBERPUNK & CLEAN PRO)
-    // ==========================================
     const themeBtn = document.getElementById("theme-toggle");
-    // ... (hapus semua isinya) ...
-    themeBtn.dataset.themeAttached = "true";
+    if (themeBtn) {
+        themeBtn.dataset.themeAttached = "true";
     }
+}

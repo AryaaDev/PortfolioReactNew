@@ -1,31 +1,27 @@
 import { useState } from 'react';
-import logoArya from '../assets/AryaDev.webp';
 
 export default function Header() {
-    // State selalu dimulai dari 'false' (Cyberpunk) setiap kali web di-refresh
-    const [isCleanMode, setIsCleanMode] = useState(false);
+    const [isProfessionalMode, setIsProfessionalMode] = useState(false);
 
-    // Fungsi mengganti tema HANYA saat tombol diklik
     const handleThemeToggle = () => {
-        const newMode = !isCleanMode;
-        setIsCleanMode(newMode);
+        const newMode = !isProfessionalMode;
 
-        // Langsung ubah class di body tanpa simpan ke storage
+        setIsProfessionalMode(newMode);
+
         if (newMode) {
-            document.body.classList.add("clean-mode");
+            document.body.classList.add('clean-mode');
         } else {
-            document.body.classList.remove("clean-mode");
+            document.body.classList.remove('clean-mode');
         }
     };
 
     return (
         <header className="header">
+            {/* Bagian logo sekarang hanya menyisakan teks AryaDev */}
             <a href="#" className="logo">
-                {/* 2. Ubah pemanggilan src */}
-                <img src={logoArya} alt="Logo AryaDev" />
                 <span className="logo-text">AryaDev</span>
             </a>
-            
+
             <nav className="navbar">
                 <a href="#home" style={{ '--i': 1 }}>Home</a>
                 <a href="#about" style={{ '--i': 2 }}>About</a>
@@ -33,16 +29,30 @@ export default function Header() {
                 <a href="#certificates" style={{ '--i': 4 }}>Certificate</a>
                 <a href="#portfolio" style={{ '--i': 5 }}>Project</a>
                 <a href="#contact" style={{ '--i': 6 }}>Contact</a>
-                
-                {/* Tombol Toggle */}
-                <button 
+
+                <button
                     onClick={handleThemeToggle}
-                    className="theme-toggle-btn" 
+                    className="theme-toggle-btn"
                     style={{ '--i': 7 }}
-                    aria-label="Toggle Clean Mode"
+                    aria-label={
+                        isProfessionalMode
+                            ? 'Switch to Tech Mode'
+                            : 'Switch to Professional Mode'
+                    }
+                    title={
+                        isProfessionalMode
+                            ? 'Switch to Tech Mode'
+                            : 'Switch to Professional Mode'
+                    }
                 >
                     <div className="toggle-thumb">
-                        <i className={isCleanMode ? "bx bx-sun" : "bx bx-moon"}></i>
+                        <i
+                            className={
+                                isProfessionalMode
+                                    ? 'bx bx-briefcase'
+                                    : 'bx bx-code-alt'
+                            }
+                        ></i>
                     </div>
                 </button>
             </nav>

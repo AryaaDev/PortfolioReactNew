@@ -1,4 +1,3 @@
-// KUMPULAN IMPORT GAMBAR PROYEK DARI FOLDER ASSETS
 // Proyek 1: Web At-Taqwa
 import web1 from '../assets/Web1.webp';
 import web2 from '../assets/Web2.webp';
@@ -32,6 +31,8 @@ import numericBackend from '../assets/backend.webp';
 import numericBackend2 from '../assets/backend2.webp';
 import numericUI from '../assets/UIKalkulator.webp';
 
+import adobeExpress from '../assets/adobe.svg';
+
 export default function Portfolio() {
     return (
         <section id="portfolio" className="portfolio">
@@ -50,6 +51,10 @@ export default function Portfolio() {
 
             {/* WADAH UTAMA 3D CAROUSEL */}
             <div className="portfolio-3d-wrapper">
+                <div className="portfolio-empty-state" aria-hidden="true">
+                    <i className="bx bx-folder-open"></i>
+                    <span>No projects available</span>
+                </div>
 
                 {/* PROYEK 1: Web At-Taqwa */}
                 <div className="portfolio-item" data-category="web">
@@ -135,9 +140,15 @@ export default function Portfolio() {
                             <div className="portfolio-tools">
                                 <span className="tool-badge">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg" width="14" alt="Canva" /> Canva
-                                </span>                            
+                                </span>
                                 <span className="tool-badge">
-                                    <i className='bx bxl-adobe' style={{ color: '#ff0421' }}></i> Adobe Express
+                                    <img
+                                        src={adobeExpress}
+                                        width="14"
+                                        height="14"
+                                        alt="Adobe Express"
+                                    />
+                                    Adobe Express
                                 </span>
                                 <span className="tool-badge">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg" width="14" alt="Photoshop" /> Photoshop
@@ -177,7 +188,7 @@ export default function Portfolio() {
                                 </span>
                                 <span className="tool-badge">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg" width="14" alt="Canva" /> Canva
-                                </span>   
+                                </span>
                             </div>
                             <span className="project-date"><i className='bx bx-calendar'></i> Ags 2025</span>
                         </div>
@@ -204,12 +215,21 @@ export default function Portfolio() {
                         </div>
                         <p>Merancang desain visual untuk produk pakaian. Fokus utama saya adalah membuat desain yang rapi, menarik, dan menyesuaikan komposisi warna agar proporsional pada kain.</p>
                         <div className="portfolio-footer">
-                                <div className="portfolio-tools">
+                            <div className="portfolio-tools">
                                 <span className="tool-badge">
                                     <img src="https://cdn.simpleicons.org/coreldraw/27CA41" width="14" alt="CorelDraw" /> CorelDraw
                                 </span>
                                 <span className="tool-badge">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/illustrator/illustrator-plain.svg" width="14" alt="Illustrator" /> Illustrator
+                                </span>
+                                <span className="tool-badge">
+                                    <img
+                                        src={adobeExpress}
+                                        width="14"
+                                        height="14"
+                                        alt="Adobe Express"
+                                    />
+                                    Adobe Express
                                 </span>
                             </div>
                             <span className="project-date"><i className='bx bx-calendar'></i> Jan 2025 - Jul 2026</span>
@@ -243,25 +263,25 @@ export default function Portfolio() {
                         <div className="portfolio-footer">
                             <div className="portfolio-tools">
                                 <span className="tool-badge">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" width="14" alt="HTML"/> HTML
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" width="14" alt="HTML" /> HTML
                                 </span>
                                 <span className="tool-badge">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" width="14" alt="CSS"/> CSS
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" width="14" alt="CSS" /> CSS
                                 </span>
                                 <span className="tool-badge">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" width="14" alt="JS"/> JS
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" width="14" alt="JS" /> JS
                                 </span>
                                 <span className="tool-badge">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" width="14" alt="Node.js"/> Node.js
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" width="14" alt="Node.js" /> Node.js
                                 </span>
                                 <span className="tool-badge">
-                                    <img src="https://cdn.simpleicons.org/express/ffffff" width="14" alt="Express"/>Express.js
+                                    <img src="https://cdn.simpleicons.org/express/ffffff" width="14" alt="Express" />Express.js
                                 </span>
                                 <span className="tool-badge">
-                                    <img src="https://cdn.simpleicons.org/github/ffffff" width="14" alt="GitHub"/>GitHub
+                                    <img src="https://cdn.simpleicons.org/github/ffffff" width="14" alt="GitHub" />GitHub
                                 </span>
                                 <span className="tool-badge">
-                                    <img src="https://cdn.simpleicons.org/vercel/ffffff" width="14" alt="Vercel"/>Vercel
+                                    <img src="https://cdn.simpleicons.org/vercel/ffffff" width="14" alt="Vercel" />Vercel
                                 </span>
                             </div>
                             <span className="project-date"><i className='bx bx-calendar'></i> Mei 2026</span>
@@ -278,11 +298,11 @@ export default function Portfolio() {
 
                 <div className="carousel-center-nav">
                     <div className="carousel-counter" id="portfolio-counter">
-                        <span className="current">01</span> 
-                        <span className="divider"> / </span> 
+                        <span className="current">01</span>
+                        <span className="divider"> / </span>
                         <span className="total">05</span>
                     </div>
-                    
+
                     <div className="carousel-dots">
                         <button className="dot active" onClick={() => window.goToProject(1)} aria-label="Go to project 1"></button>
                         <button className="dot" onClick={() => window.goToProject(2)} aria-label="Go to project 2"></button>

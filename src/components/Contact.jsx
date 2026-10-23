@@ -3,12 +3,10 @@ export default function Contact() {
         <section className="contact" id="contact">
             <div className="contact-text">
                 <h2>Contact <span>Me</span></h2>
-                <h4><span>Let's work</span> Together</h4>
+                <h4>Punya Ide? Mari Wujudkan Jadi Solusi.</h4>
 
-                <p>"Barang siapa yang ingin dilapangkan rezekinya dan dipanjangkan umurnya, maka hendaklah ia menyambung tali silaturahmi."</p>
-                <p><i>(Hadis riwayat Bukhari dan Muslim)</i></p>
-
-                <p>Ini bukan akhir, melainkan sebuah awal. Terima kasih atas kesempatan untuk menunjukkan potensi saya, dan semoga kita bisa berkolaborasi di masa depan.</p>
+                <p>"Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia."<i> (HR. Ahmad & Thabrani)</i></p>
+                <p> Setiap karya adalah kesempatan untuk memberikan manfaat. Terima kasih telah berkunjung, dan semoga kita dapat terhubung serta berkolaborasi untuk menciptakan sesuatu yang berarti. </p>
 
                 <div className="contact-info">
                     <ul className="contact-list">

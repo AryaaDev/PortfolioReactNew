@@ -15,12 +15,28 @@ export default function ParticleNetwork({ children }) {
       canvas.height = window.innerHeight;
     };
 
-    window.addEventListener('resize', () => {
-      setCanvasSize();
-      init();
-    });
+    // ==========================================
+    // REVISI 1: Simpan lebar layar saat ini
+    // ==========================================
+    let lastWidth = window.innerWidth;
 
-    // Class Partikel
+    const handleResize = () => {
+      // Cek apakah LEBAR layar benar-benar berubah (contoh: orientasi HP diputar)
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        setCanvasSize();
+        init(); // Reset partikel dari awal
+      } else {
+        // Jika hanya TINGGI yang berubah (karena address bar browser HP sembunyi/muncul),
+        // cukup update tinggi canvas saja, JANGAN jalankan init() agar partikel tidak terhapus.
+        canvas.height = window.innerHeight;
+      }
+    };
+
+    // Gunakan fungsi handleResize yang baru
+    window.addEventListener('resize', handleResize);
+
+    // Class Partikel (TETAP SAMA)
     class Particle {
       constructor(x, y, directionX, directionY, size, color) {
         this.x = x;
@@ -51,6 +67,7 @@ export default function ParticleNetwork({ children }) {
       }
     }
 
+    // Fungsi init (TETAP SAMA)
     function init() {
       particlesArray = [];
       const numberOfParticles = window.innerWidth < 768 ? 30 : 90; 
@@ -67,27 +84,19 @@ export default function ParticleNetwork({ children }) {
       }
     }
 
+    // Fungsi connect (TETAP SAMA)
     function connect() {
-      // 1. OPTIMASI: Hitung batas jarak SEKALI SAJA di luar loop
       const maxDistance = (canvas.width / 10) * (canvas.height / 10);
-      
-      // 2. OPTIMASI: Tetapkan ketebalan garis SEKALI SAJA di luar loop
       ctx.lineWidth = 1; 
 
       for (let a = 0; a < particlesArray.length; a++) {
-        // 3. OPTIMASI: b dimulai dari 'a + 1' (mencegah partikel menghitung jarak ke dirinya sendiri dan mencegah garis digambar 2 kali)
         for (let b = a + 1; b < particlesArray.length; b++) { 
-          
           const dx = particlesArray[a].x - particlesArray[b].x;
           const dy = particlesArray[a].y - particlesArray[b].y;
-          const distance = dx * dx + dy * dy; // Rumus Pythagoras tanpa akar (jauh lebih cepat)
+          const distance = dx * dx + dy * dy; 
           
           if (distance < maxDistance) {
-            // 4. OPTIMASI: Bagi distance dengan maxDistance agar opacity selalu akurat
             const opacityValue = 1 - (distance / maxDistance);
-            
-            // 5. OPTIMASI: Abaikan opacity di bawah 0.05 karena mata tidak bisa melihatnya
-            // Menghemat ribuan proses rendering garis tak kasat mata
             if (opacityValue > 0.05) {
               ctx.strokeStyle = `rgba(0, 255, 247, ${opacityValue})`;
               ctx.beginPath();
@@ -100,17 +109,14 @@ export default function ParticleNetwork({ children }) {
       }
     }
 
+    // Fungsi animate (TETAP SAMA)
     function animate() {
       animationFrameId = requestAnimationFrame(animate);
 
-      // --- LOGIKA BARU: MATIKAN PARTIKEL JIKA MODE CLEAN/PRO AKTIF ---
-      // Ini akan menghentikan seluruh hitungan matematika partikel, 
-      // sehingga website menjadi sangat ringan di CPU saat Pro Mode.
       if (document.body.classList.contains('clean-mode')) {
-        ctx.clearRect(0, 0, innerWidth, innerHeight); // Hapus canvas hingga bersih
-        return; // Hentikan fungsi di sini, partikel berhenti.
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
+        return; 
       }
-      // ---------------------------------------------------------------
 
       ctx.clearRect(0, 0, innerWidth, innerHeight);
 
@@ -126,7 +132,7 @@ export default function ParticleNetwork({ children }) {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', setCanvasSize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
