@@ -650,12 +650,6 @@ img,
     margin: 0 auto;
 }
 
-@media (min-width: 1024px) {
-    .skills-container {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
 .skill-kategori {
     position: relative;
     background: #ffffff;
@@ -765,6 +759,48 @@ img,
     color: #0f172a;
 }
 
+@media (min-width: 1024px) {
+    .skills {
+        padding: 9rem 8% 5rem;
+        background-color: transparent;
+        text-align: center;
+    }
+
+    .skills-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: start;
+    }
+
+    .skill-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .skill-kategori {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 1280px) {
+    .skills {
+        padding: 10rem 10% 6rem;
+    }
+
+    .skills-container {
+        max-width: 1280px;
+        gap: 2.5rem;
+    }
+}
 
 /* ==========================
 user mematikan animasi di browser
@@ -875,6 +911,47 @@ bagiaN soft skill dengan efek hover
     color: #0f172a;
     line-height: 1.6;
     margin: 0;
+}
+
+/* ==========================================
+   KHUSUS LAPTOP 15 INCI KE ATAS & PC / MONITOR BESAR
+========================================== */
+@media (min-width: 1440px) {
+    .soft-skills {
+        padding: 10rem 6% 6rem;
+        background-color: transparent;
+        text-align: center;
+    }
+
+    .soft-skills-section {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 2.5rem;                             
+        max-width: 1400px;                     
+        margin: 0 auto;
+    }
+
+    .soft-skills-kotak {
+        padding: 2.5rem 2.3rem;
+        border-radius: 26px;
+    }
+
+    .softskills-icon {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 2rem;
+        font-size: 2.4rem;
+    }
+
+    .soft-skills-kotak h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+
+    .soft-skills-kotak p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
 }
 
 @media (max-width: 900px) {
@@ -1182,7 +1259,69 @@ bagiaN soft skill dengan efek hover
 
 /* =====================
    MEDIA QUERI
-========================*/
+======================= */
+@media (min-width: 1440px) {
+    .certificates {
+        padding: 9rem 15px 5rem 15px; 
+    }
+
+    .certificates-title h2 {
+        font-size: 3rem;
+    }
+
+    .certificates-title p {
+        font-size: 1.25rem;
+        margin-bottom: 30px;
+    }
+
+    .sertifikat-container {
+        grid-template-columns: repeat(3, 1fr); 
+        width: 100%;
+        max-width: 100%; 
+        gap: 2rem;       
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .sertifikat-slider {
+        height: 270px;     
+    }
+
+    .slider-images,
+    .slider-img {
+        height: 250px;     
+    }
+
+    .slider-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1.9rem;
+    }
+
+    .sertifikat-desc {
+        padding: 22px 20px 52px 20px;
+    }
+
+    .sertifikat-kategori {
+        font-size: 0.8rem;
+        margin-bottom: 6px;
+    }
+
+    .sertifikat-desc h3 {
+        font-size: 1.35rem;
+        margin-bottom: 8px;
+    }
+
+    .sertifikat-desc p {
+        font-size: 1.05rem;
+        line-height: 1.6;
+    }
+
+    .sertifikat-meta .sertifikat-waktu {
+        font-size: 0.95rem;
+    }
+}
+
 @media (min-width: 1200px) {
     .sertifikat-container {
         max-width: 1100px;
@@ -1719,9 +1858,84 @@ bagiaN soft skill dengan efek hover
     background-color: #94a3b8;
 }
 
-/* =============
- (ALL DEVICES)
-=================*/
+/* ==========================
+            (ALL DEVICES)
+   KHUSUS LAPTOP 15 INCI KE ATAS & MONITOR BESAR 
+========================================== */
+@media (min-width: 1440px) {
+    .portfolio {
+        padding: 10rem 8% 6rem; 
+    }
+
+    .portfolio-title h2 {
+        font-size: 3rem;
+    }
+
+    .portfolio-title p {
+        font-size: 1.25rem;
+        margin-bottom: 25px;
+    }
+
+    .portfolio-filter {
+        margin-bottom: 30px;
+    }
+
+    .filter-btn {
+        padding: 12px 28px;
+        font-size: 1.05rem;
+    }
+
+    .portfolio-3d-sampul {
+        min-height: 620px;
+    }
+
+    .portfolio-item {
+        max-width: 620px; 
+    }
+
+    .portfolio-slider,
+    .slider-images,
+    .slider-img {
+        height: 280px; 
+    }
+
+    .portfolio-item.prev {
+        transform: scale(0.88) translateX(-68%) translateZ(-180px) rotateY(35deg);
+    }
+
+    .portfolio-item.next {
+        transform: scale(0.88) translateX(68%) translateZ(-180px) rotateY(-35deg);
+    }
+
+    .portfolio-desc {
+        padding: 24px 22px;
+    }
+
+    .portfolio-desc h3 {
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+    }
+
+    .portfolio-desc p {
+        font-size: 1.05rem;
+        line-height: 1.6;
+    }
+
+    .carousel-controls {
+        margin-top: 35px; 
+    }
+
+    .carousel-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+
+    .carousel-counter {
+        font-size: 1.25rem;
+    }
+}
+
 @media (min-width: 2560px) {
     .portfolio-3d-sampul {
         min-height: 750px;
@@ -2607,8 +2821,11 @@ total pengungjung
         text-align: center;
     }
 
-    .text-content {
+    .text-konten {
         text-align: center;
+        margin-left: 0;      
+        margin-top: 0;
+        margin-inline: auto;             
     }
 
     .profile-img {
