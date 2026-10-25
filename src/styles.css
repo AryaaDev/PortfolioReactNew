@@ -1777,7 +1777,7 @@ bagiaN soft skill dengan efek hover
     }
 
     .portfolio-item.active {
-        box-shadow: 0 5px 15px rgba(0, 255, 247, 0.2);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
     }
 
     .portfolio-item.prev {
@@ -2325,7 +2325,7 @@ total pengungjung
 
     .footer-copyright,
     .footer-text {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 }
 
@@ -2339,7 +2339,7 @@ total pengungjung
     }
 
     .back-to-top {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .visitor-counter {
@@ -2784,33 +2784,6 @@ universal teks judul dan subjudl
     color: #0f172a;
     line-height: 1.7;
     font-weight: 400;
-}
-
-@media (max-width: 991px) {
-    .theme-toggle-btn {
-        margin-left: 0;
-    }
-}
-
-@media (max-width: 768px) {
-    .theme-toggle-btn {
-        width: 48px;
-        height: 26px;
-        padding: 3px;
-    }
-
-    .toggle-thumb {
-        width: 20px;
-        height: 20px;
-    }
-
-    body.clean-mode .toggle-thumb {
-        transform: translateX(22px);
-    }
-
-    .toggle-thumb .bx {
-        font-size: 13px;
-    }
 }
 
 img[src*="/white"],

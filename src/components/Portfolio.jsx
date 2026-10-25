@@ -49,7 +49,7 @@ export default function Portfolio() {
                 <button className="filter-btn" data-filter="web">Web</button>
                 <button className="filter-btn" data-filter="design">Design</button>
                 <button className="filter-btn" data-filter="app">App</button>
-                <button className="filter-btn" data-filter="ai&ml">AI & ML</button>
+                <button className="filter-btn" data-filter="ai&ml">AI & Machine Learning</button>
             </div>
 
             {/* WADAH UTAMA 3D CAROUSEL */}
