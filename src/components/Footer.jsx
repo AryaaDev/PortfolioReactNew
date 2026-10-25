@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function Footer() {
-
     const [visitorTotal, setVisitorTotal] = useState(null);
     const [visitorError, setVisitorError] = useState(false);
-
+    
     const requestStarted = useRef(false);
 
     const counterEnabled =
@@ -13,7 +12,6 @@ export default function Footer() {
 
     useEffect(() => {
         if (!counterEnabled || requestStarted.current) return;
-
         requestStarted.current = true;
 
         async function trackVisitor() {
@@ -30,7 +28,7 @@ export default function Footer() {
                 );
 
                 const data = await response.json();
-
+                
                 if (!response.ok) {
                     throw new Error(
                         data.error || "Counter gagal dimuat"
@@ -47,7 +45,7 @@ export default function Footer() {
                 setVisitorError(false);
 
             } catch (error) {
-                console.error("Visitor counter error:", error);
+                console.error("Waduh, error pas ngambil data visitor:", error);
                 setVisitorError(true);
             }
         }

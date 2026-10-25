@@ -316,7 +316,6 @@ export default function Portfolio() {
                 {/* PROYEK 7: Next Exploration */}
                 <div className="portfolio-item" data-category="app">
                     <div className="portfolio-slider" id="portfolio-slider-7">
-                        <button className="slider-btn slider-btn-left" onClick={() => window.slidePortfolio(7, -1)} aria-label="Previous image"><i className="bx bx-chevron-left"></i></button>
 
                         <div className="slider-images" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(255, 255, 255, 0.03)', minHeight: '250px', gap: '8px' }}>
                             <i className='bx bx-code-alt' style={{ fontSize: '2.5rem', color: '#2563eb' }}></i>
@@ -325,7 +324,6 @@ export default function Portfolio() {
                             </span>
                         </div>
 
-                        <button className="slider-btn slider-btn-right" onClick={() => window.slidePortfolio(7, 1)} aria-label="Next image"><i className="bx bx-chevron-right"></i></button>
                     </div>
 
                     <div className="portfolio-desc">
@@ -337,7 +335,7 @@ export default function Portfolio() {
                         </div>
 
                         <p style={{ opacity: 0.9, marginBottom: '3.5rem' }}>
-                            Masih dalam tahap belajar dan mencoba-coba hal baru.
+                            Masih dalam proses belajar dan mencoba-coba hal baru.
                         </p>
 
                         <div className="portfolio-footer">
