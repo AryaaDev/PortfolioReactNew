@@ -1,19 +1,18 @@
-// IMPORT GAMBAR SERTIFIKAT DARI FOLDER ASSETS
 import sertifikatDicodingAI from '../assets/Sertifikat_Dicoding_MuhamadAryaDarmawan_4_page-0001.webp';
 import sertifikatSeminar from '../assets/img4.webp';
 
 export default function Certificates() {
     return (
         <section id="certificates" className="certificates style-1">
-            <div className="global-section-header">
+            <div className="text-judul-subjudul">
                 <h2>My <span>Certificate</span></h2>
                 <p>Berikut adalah beberapa sertifikat yang telah saya peroleh dalam perjalanan belajar saya</p>
             </div>
-            <div className="certificates-container">
+            <div className="sertifikat-container">
                 
                 {/* --- SERTIFIKAT 1 --- */}
-                <div className="certificate-item">
-                    <div className="certificate-slider" id="certificate-slider-2">
+                <div className="sertifikat-item">
+                    <div className="sertifikat-slider" id="sertifikat-slider-2">
                         {/* Tombol slide kiri dihapus dari sini */}
                         <div className="slider-images">
                             <img 
@@ -25,25 +24,24 @@ export default function Certificates() {
                         </div>
                         {/* Tombol slide kanan dihapus dari sini */}
                     </div>
-                    <div className="certificate-desc">
+                    <div className="sertifikat-desc">
                         
-                        {/* 👇 TAMBAHAN BADGE PINK DI SINI 👇 */}
-                        <span className="certificate-category">KURSUS AI</span>
+                        <span className="sertifikat-kategori">KURSUS AI</span>
                         
                         <h3>Belajar Dasar AI </h3>
                         <p>Diberikan atas keberhasilan menyelesaikan kelas Belajar Dasar AI dari Dicoding Indonesia.
                             Sertifikat ini menandakan penguasaan kompetensi dasar dalam bidang kecerdasan buatan dan berlaku
                             hingga 7 November 2028.</p>
-                        <div className="certificate-meta">
-                            <span className="certificate-date"><i className='bx bx-calendar'></i> November 2025</span>
+                        <div className="sertifikat-meta">
+                            <span className="sertifikat-waktu"><i className='bx bx-calendar'></i> November 2025</span>
                         </div>
                     </div>
                 </div>
 
                 {/* --- SERTIFIKAT 2 --- */}
-                <div className="certificate-item">
-                    <div className="certificate-slider" id="certificate-slider-1">
-                        {/* Tombol slide kiri dihapus dari sini */}
+                <div className="sertifikat-item">
+                    <div className="sertifikat-slider" id="sertifikat-slider-1">
+
                         <div className="slider-images">
                             <img 
                                 src={sertifikatSeminar} 
@@ -52,19 +50,18 @@ export default function Certificates() {
                                 loading="lazy" 
                             />
                         </div>
-                        {/* Tombol slide kanan dihapus dari sini */}
+
                     </div>
-                    <div className="certificate-desc">
+                    <div className="sertifikat-desc">
                         
-                        {/* 👇 TAMBAHAN BADGE PINK DI SINI 👇 */}
-                        <span className="certificate-category">SEMINAR KAMPUS</span>
+                        <span className="sertifikat-kategori">SEMINAR KAMPUS</span>
                         
                         <h3>FROM CAMPUS TO CHAMPIONSHIP</h3>
                         <p>Diberikan oleh Universitas Indraprasta PGRI sebagai pengakuan atas partisipasi dalam kegiatan
                             pengembangan prestasi nasional. Sertifikat ini mencerminkan keterlibatan dalam pengembangan
                             potensi mahasiswa.</p>
-                        <div className="certificate-meta">
-                            <span className="certificate-date"><i className='bx bx-calendar'></i>Desember 2025</span>
+                        <div className="sertifikat-meta">
+                            <span className="sertifikat-waktu"><i className='bx bx-calendar'></i>Desember 2025</span>
                         </div>
                     </div>
                 </div>

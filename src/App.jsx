@@ -2,7 +2,6 @@
 import { useEffect } from 'react';
 import runVanillaJS from './mainLogic';
 
-import ParticleNetwork from './components/ParticleNetwork';
 import Header from './components/Header';
 import Home from './components/Home';
 import About from './components/About';
@@ -22,15 +21,12 @@ function App() {
     <>
       <Header />
       <Home />
-
-      <ParticleNetwork>
-        <About />
-        <Skills />
-        <SoftSkills />
-        <Certificates />
-        <Portfolio />
-        <Contact />
-      </ParticleNetwork>
+      <About />
+      <Skills />
+      <SoftSkills />
+      <Certificates />
+      <Portfolio />
+      <Contact />
       <Footer />
     </>
   );

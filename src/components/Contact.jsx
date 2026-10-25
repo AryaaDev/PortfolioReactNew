@@ -42,7 +42,7 @@ export default function Contact() {
                                 <i className="bx bxl-tiktok"></i>
                             </a>
                         </div>
-                        {/* UBAH BARIS INI: Tambahkan import.meta.env.BASE_URL */}
+
                         <a href={`${import.meta.env.BASE_URL}CV_FHD.pdf`} target="_blank" rel="noopener noreferrer" className="btn-cv-duotone" aria-label="Lihat CV">
                             <i className="bx bx-download"></i>
                             <span>Lihat CV </span>

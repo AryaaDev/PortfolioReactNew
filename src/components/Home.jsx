@@ -8,9 +8,9 @@ export default function Home() {
     useEffect(() => {
         const typed = new Typed(el.current, {
             strings: [
-            "Software Engineer",    // 1. Pukulan pertama: Kesan profesional & engineer mindset.
-            "Full Stack Developer", // 2. Skill teknis: Menunjukkan Anda menguasai keseluruhan sistem.
-            "App Developer"         // 3. Output produk: Fokus pada pembuatan aplikasi nyata.
+            "Software Engineer",    
+            "Full Stack Developer", 
+            "App Developer"         
         ],
             typeSpeed: 100,
             backSpeed: 100,
@@ -26,23 +26,10 @@ export default function Home() {
     return (
         <section className="home" id="home">
 
-            {/* Hapus atribut poster={posterVideo} jika kamu menghapus import di atas */}
-            <video
-                className="bg-video"
-                autoPlay 
-                muted 
-                loop 
-                playsInline
-            >
-                <source src={`${import.meta.env.BASE_URL}13.mp4`} type="video/mp4" />
-            </video>
+            <div className="home-konten">
 
-            <div className="video-overlay"></div>
-
-            <div className="home-content">
-
-                {/* Text Content */}
-                <div className="text-content">
+                {/* Text konten */}
+                <div className="text-konten">
 
                     <h3>Hello, I'm</h3>
 
@@ -106,8 +93,8 @@ export default function Home() {
 
                 </div>
 
-                {/* Profile */}
-                <div className="profile-wrapper">
+                {/* Profil */}
+                <div className="profile-sampul">
                     <div className="profile-img">
                         <img src={fotoProfil} alt="Muhamad Arya Darmawan" />
                     </div>

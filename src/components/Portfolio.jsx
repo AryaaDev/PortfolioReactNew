@@ -8,7 +8,7 @@ import web5 from '../assets/Web5.webp';
 // Proyek 2: Fan's Food
 import fansNasiAyam from '../assets/Nasi Ayam Bakar Sambal Ijo_PESONA.webp';
 import fansBanner from '../assets/banner-depan-uk-1000x500mm.webp';
-import fansDesain from '../assets/Fan\'sFood.webp'; // Menggunakan \ escape character jika ada tanda kutip di nama file
+import fansDesain from '../assets/Fan\'sFood.webp';
 import fansLogo from '../assets/logo-fan_s-food.webp';
 import fansFoto from '../assets/foto-fans-food2.webp';
 
@@ -31,12 +31,15 @@ import numericBackend from '../assets/backend.webp';
 import numericBackend2 from '../assets/backend2.webp';
 import numericUI from '../assets/UIKalkulator.webp';
 
+// Proyek 6: Cafe Papa
+import cafePapa3 from '../assets/CafePapa3.png';
+
 import adobeExpress from '../assets/adobe.svg';
 
 export default function Portfolio() {
     return (
         <section id="portfolio" className="portfolio">
-            <div className="global-section-header">
+            <div className="text-judul-subjudul">
                 <h2>My <span>Project</span></h2>
                 <p>Beberapa project terbaik yang pernah saya kerjakan</p>
             </div>
@@ -46,14 +49,14 @@ export default function Portfolio() {
                 <button className="filter-btn" data-filter="web">Web</button>
                 <button className="filter-btn" data-filter="design">Design</button>
                 <button className="filter-btn" data-filter="app">App</button>
-                <button className="filter-btn" data-filter="cybersecurity">Cybersecurity</button>
+                <button className="filter-btn" data-filter="ai&ml">AI & ML</button>
             </div>
 
             {/* WADAH UTAMA 3D CAROUSEL */}
-            <div className="portfolio-3d-wrapper">
+            <div className="portfolio-3d-sampul">
                 <div className="portfolio-empty-state" aria-hidden="true">
                     <i className="bx bx-folder-open"></i>
-                    <span>No projects available</span>
+                    <span>Belum ada proyek</span>
                 </div>
 
                 {/* PROYEK 1: Web At-Taqwa */}
@@ -72,7 +75,7 @@ export default function Portfolio() {
                     <div className="portfolio-desc">
                         <div className="desc-header-top">
                             <div className="desc-header-titles">
-                                <span className="badge-category">WEB DEV</span>
+                                <span className="portfolio-kategori">WEB DEV</span>
                                 <h3>Website Masjid At-Taqwa</h3>
                             </div>
                             <a href="https://maps.app.goo.gl/XMfM1E5cBURVrzFV9" className="portfolio-link-icon" target="_blank" rel="noreferrer" aria-label="View project">
@@ -82,32 +85,32 @@ export default function Portfolio() {
                         <p>Ketua Pelaksana program MBKM (Merdeka Belajar–Kampus Merdeka) semester 1. Bersama tim, merancang dan meluncurkan website resmi Masjid At-Taqwa Poltangan dengan fokus UI/UX modern dan responsif</p>
                         <div className="portfolio-footer">
                             <div className="portfolio-tools">
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" width="14" alt="HTML" /> HTML
                                 </span>
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" width="14" alt="CSS" /> CSS
                                 </span>
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" width="14" alt="JS" /> JS
                                 </span>
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg" width="14" alt="Bootstrap" /> Bootstrap
                                 </span>
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg" width="14" alt="SCSS" /> SCSS
                                 </span>
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" width="14" alt="PHP" /> PHP
                                 </span>
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" width="14" alt="MySQL" /> MySQL
                                 </span>
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" width="14" alt="Figma" /> Figma
                                 </span>
                             </div>
-                            <span className="project-date"><i className='bx bx-calendar'></i> Nov - Des 2024</span>
+                            <span className="portfolio-waktu"><i className='bx bx-calendar'></i> Nov - Des 2024</span>
                         </div>
                     </div>
                 </div>
@@ -128,33 +131,24 @@ export default function Portfolio() {
                     <div className="portfolio-desc">
                         <div className="desc-header-top">
                             <div className="desc-header-titles">
-                                <span className="badge-category">DESIGN</span>
+                                <span className="portfolio-kategori">DESIGN</span>
                                 <h3>Restoran Fan's Food</h3>
                             </div>
-                            <a href="https://maps.app.goo.gl/VPiFpUZd7jmcrbJZ6" className="portfolio-link-icon" target="_blank" rel="noreferrer" aria-label="View project">
-                                <i className="bx bx-link-external"></i>
-                            </a>
                         </div>
                         <p>Proyek sebagai Graphic Designer di restoran Fan's Food. Di sini, saya merancang materi visual dan memahami alur kerja serta dinamika industri kuliner untuk memperluas perspektif kreatif.</p>
                         <div className="portfolio-footer">
                             <div className="portfolio-tools">
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg" width="14" alt="Canva" /> Canva
                                 </span>
-                                <span className="tool-badge">
-                                    <img
-                                        src={adobeExpress}
-                                        width="14"
-                                        height="14"
-                                        alt="Adobe Express"
-                                    />
-                                    Adobe Express
+                                <span className="icon-tools">
+                                    <img src={adobeExpress} width="14" height="14" alt="Adobe Express" /> Adobe Express
                                 </span>
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg" width="14" alt="Photoshop" /> Photoshop
                                 </span>
                             </div>
-                            <span className="project-date"><i className='bx bx-calendar'></i> Jul - Des 2025</span>
+                            <span className="portfolio-waktu"><i className='bx bx-calendar'></i> Jul - Des 2025</span>
                         </div>
                     </div>
                 </div>
@@ -176,21 +170,21 @@ export default function Portfolio() {
                     <div className="portfolio-desc">
                         <div className="desc-header-top">
                             <div className="desc-header-titles">
-                                <span className="badge-category">DESIGN UI/UX MOBILE APP</span>
+                                <span className="portfolio-kategori">DESIGN UI/UX MOBILE APP</span>
                                 <h3>ICHIWALLET – Digital Wallet For Everyone</h3>
                             </div>
                         </div>
                         <p>Ichiwallet hadir sebagai ekosistem keuangan personal yang menyatukan kecanggihan teknologi dengan kemudahan penggunaan. Satu Genggaman, Ribuan Kemudahan.</p>
                         <div className="portfolio-footer">
                             <div className="portfolio-tools">
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" width="14" alt="Figma" /> Figma
                                 </span>
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg" width="14" alt="Canva" /> Canva
                                 </span>
                             </div>
-                            <span className="project-date"><i className='bx bx-calendar'></i> Ags 2025</span>
+                            <span className="portfolio-waktu"><i className='bx bx-calendar'></i> Ags 2025</span>
                         </div>
                     </div>
                 </div>
@@ -209,30 +203,24 @@ export default function Portfolio() {
                     <div className="portfolio-desc">
                         <div className="desc-header-top">
                             <div className="desc-header-titles">
-                                <span className="badge-category">DESIGN</span>
+                                <span className="portfolio-kategori">DESIGN</span>
                                 <h3>Apparel Designer</h3>
                             </div>
                         </div>
                         <p>Merancang desain visual untuk produk pakaian. Fokus utama saya adalah membuat desain yang rapi, menarik, dan menyesuaikan komposisi warna agar proporsional pada kain.</p>
                         <div className="portfolio-footer">
                             <div className="portfolio-tools">
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.simpleicons.org/coreldraw/27CA41" width="14" alt="CorelDraw" /> CorelDraw
                                 </span>
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/illustrator/illustrator-plain.svg" width="14" alt="Illustrator" /> Illustrator
                                 </span>
-                                <span className="tool-badge">
-                                    <img
-                                        src={adobeExpress}
-                                        width="14"
-                                        height="14"
-                                        alt="Adobe Express"
-                                    />
-                                    Adobe Express
+                                <span className="icon-tools">
+                                    <img src={adobeExpress} width="14" height="14" alt="Adobe Express" /> Adobe Express
                                 </span>
                             </div>
-                            <span className="project-date"><i className='bx bx-calendar'></i> Jan 2025 - Jul 2026</span>
+                            <span className="portfolio-waktu"><i className='bx bx-calendar'></i> Jan 2025 - Jul 2026</span>
                         </div>
                     </div>
                 </div>
@@ -252,7 +240,7 @@ export default function Portfolio() {
                     <div className="portfolio-desc">
                         <div className="desc-header-top">
                             <div className="desc-header-titles">
-                                <span className="badge-category">WEB DEV</span>
+                                <span className="portfolio-kategori">WEB DEV</span>
                                 <h3>NUMERIC ENGINE - Built for ease</h3>
                             </div>
                             <a href="https://aryaadev.github.io/NumericEngine-Kelompok1R4U/" className="portfolio-link-icon" target="_blank" rel="noreferrer" aria-label="View project">
@@ -262,32 +250,113 @@ export default function Portfolio() {
                         <p>Lead Developer dalam pengembangan Kalkulator Metode Numerik berbasis web, bertanggung jawab atas arsitektur aplikasi, implementasi algoritma, fitur perhitungan, dan ekspor PDF untuk mendukung kegiatan akademik mahasiswa dan dosen.</p>
                         <div className="portfolio-footer">
                             <div className="portfolio-tools">
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" width="14" alt="HTML" /> HTML
                                 </span>
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" width="14" alt="CSS" /> CSS
                                 </span>
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" width="14" alt="JS" /> JS
                                 </span>
-                                <span className="tool-badge">
+                                <span className="icon-tools">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" width="14" alt="Node.js" /> Node.js
                                 </span>
-                                <span className="tool-badge">
-                                    <img src="https://cdn.simpleicons.org/express/ffffff" width="14" alt="Express" />Express.js
+                                <span className="icon-tools">
+                                    <img src="https://cdn.simpleicons.org/express/ffffff" width="14" alt="Express" /> Express.js
                                 </span>
-                                <span className="tool-badge">
-                                    <img src="https://cdn.simpleicons.org/github/ffffff" width="14" alt="GitHub" />GitHub
+                                <span className="icon-tools">
+                                    <img src="https://cdn.simpleicons.org/github/ffffff" width="14" alt="GitHub" /> GitHub
                                 </span>
-                                <span className="tool-badge">
-                                    <img src="https://cdn.simpleicons.org/vercel/ffffff" width="14" alt="Vercel" />Vercel
+                                <span className="icon-tools">
+                                    <img src="https://cdn.simpleicons.org/vercel/ffffff" width="14" alt="Vercel" /> Vercel
                                 </span>
                             </div>
-                            <span className="project-date"><i className='bx bx-calendar'></i> Mei 2026</span>
+                            <span className="portfolio-waktu"><i className='bx bx-calendar'></i> Mei 2026</span>
                         </div>
                     </div>
                 </div>
+
+                {/* PROYEK 6: Cafe Papa */}
+                <div className="portfolio-item" data-category="design">
+                    <div className="portfolio-slider" id="portfolio-slider-6">
+                        <button className="slider-btn slider-btn-left" onClick={() => window.slidePortfolio(6, -1)} aria-label="Previous image"><i className="bx bx-chevron-left"></i></button>
+                        <div className="slider-images">
+                            <img src={cafePapa3} alt="" className="slider-img active" loading="lazy" />
+                        </div>
+                        <button className="slider-btn slider-btn-right" onClick={() => window.slidePortfolio(6, 1)} aria-label="Next image"><i className="bx bx-chevron-right"></i></button>
+                    </div>
+                    <div className="portfolio-desc">
+                        <div className="desc-header-top">
+                            <div className="desc-header-titles">
+                                <span className="portfolio-kategori">DESIGN</span>
+                                <h3>Cafe'Papa</h3>
+                            </div>
+                        </div>
+                        <p>Membantu pembuatan berbagai kebutuhan visual dan digital untuk Cafe'Papa sesuai arahan, mulai dari banner, logo, book menu, desain cup, hingga pengaturan Google Maps dan aktivasi akun merchant online.</p>                        <div className="portfolio-footer">
+                            <div className="portfolio-tools">
+                                <span className="icon-tools">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg" width="14" alt="Canva" /> Canva
+                                </span>
+                                <span className="icon-tools">
+                                    <img src={adobeExpress} width="14" height="14" alt="Adobe Express" /> Adobe Express
+                                </span>
+                                <span className="icon-tools">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/inkscape/inkscape-original.svg" width="14" alt="Inkscape" /> Inkscape
+                                </span>
+                                <span className="icon-tools">
+                                    <i className='bx bx-package' style={{ color: '#ff6b6b' }}></i> Packdora
+                                </span>
+                            </div>
+                            <span className="portfolio-waktu"><i className='bx bx-calendar'></i>April 2026 - Sekarang</span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* PROYEK 7: Next Exploration */}
+                <div className="portfolio-item" data-category="app">
+                    <div className="portfolio-slider" id="portfolio-slider-7">
+                        <button className="slider-btn slider-btn-left" onClick={() => window.slidePortfolio(7, -1)} aria-label="Previous image"><i className="bx bx-chevron-left"></i></button>
+
+                        <div className="slider-images" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(255, 255, 255, 0.03)', minHeight: '250px', gap: '8px' }}>
+                            <i className='bx bx-code-alt' style={{ fontSize: '2.5rem', color: '#2563eb' }}></i>
+                            <span style={{ fontStyle: 'italic', color: '#2563eb', fontSize: '1.2rem', letterSpacing: '1px', fontWeight: '500' }}>
+                                Masih terus belajar...
+                            </span>
+                        </div>
+
+                        <button className="slider-btn slider-btn-right" onClick={() => window.slidePortfolio(7, 1)} aria-label="Next image"><i className="bx bx-chevron-right"></i></button>
+                    </div>
+
+                    <div className="portfolio-desc">
+                        <div className="desc-header-top">
+                            <div className="desc-header-titles">
+                                <span className="portfolio-kategori">EKSPLORASI NEW PROJECT</span>
+                                <h3>AI Chatbot, API Downloader & Mobile Assistant</h3>
+                            </div>
+                        </div>
+
+                        <p style={{ opacity: 0.9, marginBottom: '3.5rem' }}>
+                            Masih dalam tahap belajar dan mencoba-coba hal baru.
+                        </p>
+
+                        <div className="portfolio-footer">
+                            <div className="portfolio-tools">
+                                <span className="icon-tools">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" width="14" alt="Python" /> Python
+                                </span>
+                                <span className="icon-tools">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" width="14" alt="React" /> React / Mobile
+                                </span>
+                                <span className="icon-tools">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" width="14" alt="Node.js" /> Node.js API
+                                </span>
+                            </div>
+                            <span className="portfolio-waktu"><i className='bx bx-calendar'></i>Planning</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             {/* NAVIGASI UTAMA 3D CAROUSEL BAWAH */}
@@ -300,7 +369,7 @@ export default function Portfolio() {
                     <div className="carousel-counter" id="portfolio-counter">
                         <span className="current">01</span>
                         <span className="divider"> / </span>
-                        <span className="total">05</span>
+                        <span className="total">07</span>
                     </div>
 
                     <div className="carousel-dots">
@@ -309,6 +378,8 @@ export default function Portfolio() {
                         <button className="dot" onClick={() => window.goToProject(3)} aria-label="Go to project 3"></button>
                         <button className="dot" onClick={() => window.goToProject(4)} aria-label="Go to project 4"></button>
                         <button className="dot" onClick={() => window.goToProject(5)} aria-label="Go to project 5"></button>
+                        <button className="dot" onClick={() => window.goToProject(6)} aria-label="Go to project 6"></button>
+                        <button className="dot" onClick={() => window.goToProject(7)} aria-label="Go to project 7"></button>
                     </div>
                 </div>
 

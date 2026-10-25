@@ -34,7 +34,7 @@ export default function runVanillaJS() {
     observeMultipleOnce(".skills-title h2, .skills-title span, .skill", ["visible", "animate"], 0.25);
     observeMultipleOnce(".contact, .contact-text, .contact-info, .contact-list li, .contact-form", ["visible"], 0.35);
     observeMultipleOnce(".contact-text p, .contact-list li, .contact-form input, .contact-form textarea, .contact-form .send", ["show"], 0.25);
-    observeMultipleOnce(".certificate-item", ["animate"], 0.25);
+    observeMultipleOnce(".sertifikat-item", ["animate"], 0.25);
     observeOnce(".certificates-title h2", "animate", 0.5);
 
     const softSection = document.querySelector("#SoftSkills");
@@ -71,7 +71,7 @@ const filterButtons = document.querySelectorAll(".filter-btn");
 const portfolioItems = Array.from(
     document.querySelectorAll(".portfolio-item")
 );
-const portfolioWrapper = document.querySelector(".portfolio-3d-wrapper");
+const portfolioWrapper = document.querySelector(".portfolio-3d-sampul");
 
 // Cache elemen yang sering digunakan
 const emptyState = document.querySelector(".portfolio-empty-state");
@@ -1086,7 +1086,7 @@ function update3DCarousel() {
     // ==========================================
     // 9. BENTO CARD SPOTLIGHT EFFECT
     // ==========================================
-    const bentoCards = document.querySelectorAll(".bento-card");
+    const bentoCards = document.querySelectorAll(".soft-skills-kotak");
     bentoCards.forEach((card) => {
         if (card.dataset.spotlightAttached) return;
         let rafId = null;
@@ -1103,8 +1103,4 @@ function update3DCarousel() {
         card.dataset.spotlightAttached = "true";
     });
 
-    const themeBtn = document.getElementById("theme-toggle");
-    if (themeBtn) {
-        themeBtn.dataset.themeAttached = "true";
-    }
 }
