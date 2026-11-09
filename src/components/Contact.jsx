@@ -43,7 +43,7 @@ export default function Contact() {
                             </a>
                         </div>
 
-                        <a href={`${import.meta.env.BASE_URL}CV_FHD.pdf`} target="_blank" rel="noopener noreferrer" className="btn-cv-duotone" aria-label="Lihat CV">
+                        <a href={`${import.meta.env.BASE_URL}CV_MuhamadAryaDarmawan_Semester5.pdf`} target="_blank" rel="noopener noreferrer" className="btn-cv-duotone" aria-label="Lihat CV">
                             <i className="bx bx-download"></i>
                             <span>Lihat CV </span>
                         </a>
