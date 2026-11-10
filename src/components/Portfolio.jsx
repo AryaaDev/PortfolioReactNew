@@ -247,7 +247,7 @@ export default function Portfolio() {
                                 <i className="bx bx-link-external"></i>
                             </a>
                         </div>
-                        <p>Lead Developer dalam pengembangan Kalkulator Metode Numerik berbasis web, bertanggung jawab atas arsitektur aplikasi, implementasi algoritma, fitur perhitungan, dan ekspor PDF untuk mendukung kegiatan akademik mahasiswa dan dosen.</p>
+                        <p>Lead Developer dalam pengembangan Kalkulator Metode Numerik berbasis web, bertanggung jawab atas arsitektur aplikasi, implementasi algoritma, fitur perhitungan, UI dan ekspor PDF untuk mendukung kegiatan akademik mahasiswa dan dosen.</p>
                         <div className="portfolio-footer">
                             <div className="portfolio-tools">
                                 <span className="icon-tools">
